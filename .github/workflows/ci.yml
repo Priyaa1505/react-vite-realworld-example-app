@@ -1,0 +1,28 @@
+name: Frontend CI react-vite yml
+on:
+  push:
+    branches:
+       - main
+
+   pull_request:
+     branches:
+       - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Checkout code 
+        uses: actions/checkoot@v4
+
+      - name: setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: install dependencies 
+        run: npm ci 
+
+      - name: build application 
+        run: npm run build 
