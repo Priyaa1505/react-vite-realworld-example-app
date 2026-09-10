@@ -23,7 +23,6 @@ jobs:
 
       - name: Build application
         run: npm run build
-        run: npm ci 
+        
 
-      - name: build application 
-        run: npm run build 
+     
