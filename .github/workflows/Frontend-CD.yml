@@ -51,20 +51,17 @@ jobs:
       # 4. Build Docker image
       # --------------------------------------------------
       - name: Build Docker image
-        run: |
-          docker build \
-           -t ${{ steps.ecr-login.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.event.workflow_run.head_sha }}
+        run: docker build -t ${{ steps.ecr-login.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.event.workflow_run.head_sha }} -t ${{ steps.ecr-login.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest .
+         
 
       # --------------------------------------------------
       # 5. Push Docker image to ECR
       # --------------------------------------------------
       - name: Push Docker image to ECR
         run: |
-          docker push \
-            ${{ steps.ecr-login.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
-
-          docker push \
-            ${{ steps.ecr-login.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
+          docker push ${{ steps.ecr-login.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.event.workflow_run.head_sha }}
+          docker push ${{ steps.ecr-login.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
+         
 
       # --------------------------------------------------
       # 6. Deploy to EC2
