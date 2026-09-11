@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <GuestRoute path="/register" element={<Auth key="register" />} />
-          <GuestRoute path="/login" element={<Auth key="login" />} />
+          <GuestRoute path="/login 2" element={<Auth key="login" />} />
           <AuthRoute path="/settings" element={<Settings />} />
           <AuthRoute path="/editor" element={<Editor />} />
           <Route path="/editor/:slug" element={<Editor />} />
