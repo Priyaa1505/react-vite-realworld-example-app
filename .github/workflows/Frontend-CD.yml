@@ -53,9 +53,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t ${{ steps.ecr-login.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }} \
-            -t ${{ steps.ecr-login.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest \
-            .
+           -t ${{ steps.ecr-login.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.event.workflow_run.head_sha }}
 
       # --------------------------------------------------
       # 5. Push Docker image to ECR
@@ -78,7 +76,7 @@ jobs:
           AWS_REGION: ${{ env.AWS_REGION }}
           ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
           ECR_REPOSITORY: ${{ env.ECR_REPOSITORY }}
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: ${{ github.event.workflow_run.head_sha }}
           CONTAINER_NAME: ${{ env.CONTAINER_NAME }}
           HOST_PORT: ${{ env.HOST_PORT }}
           CONTAINER_PORT: ${{ env.CONTAINER_PORT }}
