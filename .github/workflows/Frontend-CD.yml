@@ -3,7 +3,7 @@ name: Frontend CD
 on:
   workflow_run:
     workflows:
-      - "ci.yml"
+      - "Frontend CI"
     types:
       - completed
 
